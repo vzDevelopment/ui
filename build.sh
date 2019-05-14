@@ -1,3 +1,3 @@
 set -ex
 
-docker build -t fnproject/ui:latest .
+docker build -t odev/uitest:latest .

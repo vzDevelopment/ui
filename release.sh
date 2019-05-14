@@ -12,7 +12,7 @@ else
   exit 1
 fi
 
-image="fnproject/ui"
+image="odev/uitest"
 
 git pull
 
@@ -29,11 +29,6 @@ echo "Version: $version"
 ./build.sh
 
 tag="$version"
-git add -u
-git commit -m "fn UI: $version [skip ci]"
-git tag -f -a $tag -m "fn UI: $version"
-git push
-git push origin $tag
 
 docker tag $image:latest $image:$version
 docker push $image:$version

@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     machine: true
-    working_directory: ~/go/src/github.com/fnproject/ui
     environment: # apparently expansion doesn't work here yet: https://discuss.circleci.com/t/environment-variable-expansion-in-working-directory/11322
       - GOPATH=/home/circleci/go
       - GOVERSION=1.8.3
@@ -19,10 +18,8 @@ jobs:
       # - run: ./test.sh
       - deploy:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              git config --global user.email "ci@fnproject.com"
-              git config --global user.name "CI"
-              git branch --set-upstream-to=origin/${CIRCLE_BRANCH} ${CIRCLE_BRANCH}
-              ./release.sh
-            fi
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            git config --global user.email "vzDevelopment@github.invalid"
+            git config --global user.name "vzDevelopment CI"
+            git branch --set-upstream-to=origin/${CIRCLE_BRANCH} ${CIRCLE_BRANCH}
+            ./release.sh
