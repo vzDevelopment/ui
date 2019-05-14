@@ -11,11 +11,12 @@ jobs:
             npm install --only dev
             ./node_modules/.bin/eslint .
 
-      # update Docker
-      - run: |
-          docker version
-          sudo service docker stop
-          curl -fsSL https://get.docker.com/ | sudo sh
+      - run:
+          name: "Update Docker"
+          command: |
+            docker version
+            sudo service docker stop
+            curl -fsSL https://get.docker.com/ | sudo sh
       - run: docker version
 
       # clean up after linting and testing e.g. remove node_modules/
