@@ -9,6 +9,10 @@ jobs:
       - ARCH=amd64
     steps:
       - checkout
+      # lint the code
+      - run: |
+          npm install --only dev
+          ./node_modules/.bin/eslint .
       # update Docker
       - run: |
           docker version
@@ -16,6 +20,11 @@ jobs:
           curl -fsSL https://get.docker.com/ | sudo sh
       - run: docker version
       # - run: ./test.sh
+      # clean up after linting and testing e.g. remove node_modules/
+      # so it isn't including in any production images
+      - run: |
+          git clean -fxd
+          git reset --hard
       - deploy:
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
