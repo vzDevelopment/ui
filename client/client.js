@@ -28,8 +28,6 @@ const router = new VueRouter({
   ]
 });
 
-console.log("This shouldn't be here");
-
 new Vue({
   router: router,
   data: {
